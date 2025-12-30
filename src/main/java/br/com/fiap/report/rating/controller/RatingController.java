@@ -1,5 +1,7 @@
 package br.com.fiap.report.rating.controller;
 
+import br.com.fiap.report.rating.dto.queue.RatingReportDTO;
+import br.com.fiap.report.rating.dto.response.RatingCountByDateDTO;
 import br.com.fiap.report.rating.entity.RatingEntity;
 import br.com.fiap.report.rating.service.RatingService;
 import lombok.RequiredArgsConstructor;
@@ -31,6 +33,16 @@ public class RatingController {
     @GetMapping("/count/grouped-by-critical")
     public Map<String, Long> countRatingsGroupedByCritical() {
         return ratingService.countRatingByDateTimeBetweenGroupedByIsCritical(LocalDateTime.now().minusDays(7), LocalDateTime.now());
+    }
+
+    @GetMapping("/count/grouped-by-date")
+    public List<RatingCountByDateDTO> countRatingsGroupedByDate() {
+        return ratingService.countRatingByDateTimeBetweenGroupedByDate(LocalDateTime.now().minusDays(7), LocalDateTime.now());
+    }
+
+    @GetMapping("/weekly-rating-report")
+    public RatingReportDTO weeklyRatingReport() {
+        return ratingService.getRatingReportByDateTimeBetween(LocalDateTime.now().minusDays(7), LocalDateTime.now());
     }
 
 }

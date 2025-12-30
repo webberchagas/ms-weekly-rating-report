@@ -28,6 +28,13 @@
     </scm>
     <properties>
         <java.version>21</java.version>
+        <azure.functions.java.library.version>3.0.0</azure.functions.java.library.version>
+        <azure.functions.maven.plugin.version>1.22.0</azure.functions.maven.plugin.version>
+        <functionAppName>azure-functions-sample</functionAppName>
+        <functionAppRegion>westus</functionAppRegion>
+        <functionResourceGroup>java-functions-resource-group</functionResourceGroup>
+        <functionServicePlan>java-functions-service-plan</functionServicePlan>
+        <functionPricingTier>Y1</functionPricingTier>
     </properties>
     <dependencies>
         <dependency>
@@ -37,6 +44,16 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.microsoft.azure.functions</groupId>
+            <artifactId>azure-functions-java-library</artifactId>
+            <version>${azure.functions.java.library.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.microsoft</groupId>
+            <artifactId>durabletask-azure-functions</artifactId>
+            <version>1.0.0</version>
         </dependency>
 
         <dependency>
@@ -53,6 +70,37 @@
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>com.microsoft.azure</groupId>
+                <artifactId>azure-functions-maven-plugin</artifactId>
+                <version>${azure.functions.maven.plugin.version}</version>
+                <configuration>
+                    <appName>${functionAppName}</appName>
+                    <resourceGroup>${functionResourceGroup}</resourceGroup>
+                    <appServicePlanName>${functionServicePlan}</appServicePlanName>
+                    <region>${functionAppRegion}</region>
+                    <pricingTier>${functionPricingTier}</pricingTier>
+
+                    <runtime>
+                        <os>windows</os>
+                        <javaVersion>8</javaVersion>
+                    </runtime>
+                    <appSettings>
+                        <property>
+                            <name>FUNCTIONS_EXTENSION_VERSION</name>
+                            <value>~4</value>
+                        </property>
+                    </appSettings>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>package-functions</id>
+                        <goals>
+                            <goal>package</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
