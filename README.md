@@ -1,4 +1,4 @@
-# 📊 Course Rating – Azure Functions
+# 📊 MS Weekly Rating Report – Azure Functions
 
 ![Java](https://img.shields.io/badge/Java-21-red?logo=openjdk&logoColor=white)
 ![Azure Functions](https://img.shields.io/badge/Azure%20Functions-Serverless-blue?logo=azurefunctions&logoColor=white)
