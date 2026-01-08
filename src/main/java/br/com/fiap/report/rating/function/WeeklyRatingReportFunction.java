@@ -20,7 +20,7 @@ public class WeeklyRatingReportFunction {
     public void run(
         @TimerTrigger(
                 name = "WeeklyRatingReportTrigger",
-                schedule = "0 */1 * * * *"
+                schedule = "0 */5 * * * *"
         ) String timerInfo,
         final ExecutionContext executionContext,
         @ServiceBusQueueOutput(
@@ -38,6 +38,8 @@ public class WeeklyRatingReportFunction {
             );
 
             ratingReportMessage.setValue(objectMapper.writeValueAsString(ratingReportDTO));
+
+            executionContext.getLogger().info(objectMapper.writeValueAsString(ratingReportDTO));
 
             executionContext.getLogger().info("Relatório semanal de avaliações enviado para processamento.");
         } catch (Exception e) {

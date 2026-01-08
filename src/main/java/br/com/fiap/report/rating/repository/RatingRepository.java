@@ -37,8 +37,8 @@ public class RatingRepository {
         Date endDate   = Date.from(end.atZone(ZoneId.systemDefault()).toInstant());
 
         Bson filter = Filters.and(
-                Filters.gte("dateTime", startDate),
-                Filters.lte("dateTime", endDate)
+                Filters.gte("createdAt", startDate),
+                Filters.lte("createdAt", endDate)
         );
 
         List<RatingEntity> results = new ArrayList<>();
@@ -55,8 +55,8 @@ public class RatingRepository {
         Date endDate   = Date.from(end.atZone(zone).toInstant());
 
         Bson filter = Filters.and(
-                Filters.gte("dateTime", startDate),
-                Filters.lte("dateTime", endDate)
+                Filters.gte("createdAt", startDate),
+                Filters.lte("createdAt", endDate)
         );
 
         return collection.countDocuments(filter);
@@ -69,9 +69,9 @@ public class RatingRepository {
         Date endDate   = Date.from(end.atZone(zone).toInstant());
 
         Bson filter = Filters.and(
-                Filters.gte("dateTime", startDate),
-                Filters.lte("dateTime", endDate),
-                Filters.eq("isCritical", isCritical)
+                Filters.gte("createdAt", startDate),
+                Filters.lte("createdAt", endDate),
+                Filters.eq("critical", isCritical)
         );
 
         return collection.countDocuments(filter);
@@ -88,8 +88,8 @@ public class RatingRepository {
                 // MATCH
                 Aggregates.match(
                         Filters.and(
-                                Filters.gte("dateTime", startDate),
-                                Filters.lte("dateTime", endDate)
+                                Filters.gte("createdAt", startDate),
+                                Filters.lte("createdAt", endDate)
                         )
                 ),
 
@@ -100,7 +100,7 @@ public class RatingRepository {
                                         "date",
                                         new Document("$dateToString",
                                                 new Document("format", "%Y-%m-%d")
-                                                        .append("date", "$dateTime")
+                                                        .append("date", "$createdAt")
                                         )
                                 )
                         )
@@ -146,8 +146,8 @@ public class RatingRepository {
                 extractId(doc),
                 doc.getString("description"),
                 doc.getInteger("rating"),
-                doc.getBoolean("isCritical"),
-                doc.getDate("dateTime")
+                doc.getBoolean("critical"),
+                doc.getDate("createdAt")
                         .toInstant()
                         .atZone(ZoneOffset.UTC)
                         .toLocalDateTime()
@@ -160,7 +160,5 @@ public class RatingRepository {
                 ? ((ObjectId) id).toHexString()
                 : id.toString();
     }
-
-
 
 }
