@@ -20,7 +20,7 @@ public class WeeklyRatingReportFunction {
     public void run(
         @TimerTrigger(
                 name = "WeeklyRatingReportTrigger",
-                schedule = "0 */5 * * * *"
+                schedule = "59 59 23 * * 7"
         ) String timerInfo,
         final ExecutionContext executionContext,
         @ServiceBusQueueOutput(
