@@ -92,6 +92,11 @@ jobs:
                 "name": "SERVICE_BUS_CONNECTION",
                 "value": "${{ secrets.SERVICE_BUS_CONNECTION }}",
                 "slotSetting": false
+              },
+              {
+                "name": "QUEUE_WEEKLY_REPORT",
+                "value": "${{ vars.QUEUE_WEEKLY_REPORT }}",
+                "slotSetting": false
               }
             ]
             
