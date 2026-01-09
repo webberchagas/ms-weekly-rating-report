@@ -102,6 +102,7 @@ Azure Function (Time Trigger) → MongoDB (Busca as avaliações) → Gera o rel
     "MONGODB_URI": "...",
     "MONGO_DB": "...",
     "MONGO_COLLECTION": "...",
+    "QUEUE_WEEKLY_REPORT": "q-ms-weekly-report",
     "SERVICE_BUS_CONNECTION": "Endpoint=sb://..."
   }
 }
