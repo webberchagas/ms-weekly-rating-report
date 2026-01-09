@@ -25,7 +25,7 @@ public class WeeklyRatingReportFunction {
         final ExecutionContext executionContext,
         @ServiceBusQueueOutput(
                 name = "ratingReportMessage",
-                queueName = "q-ms-weekly-report",
+                queueName = "%QUEUE_WEEKLY_REPORT%",
                 connection = "SERVICE_BUS_CONNECTION"
         ) OutputBinding<String> ratingReportMessage
     ) {
